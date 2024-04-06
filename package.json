@@ -1,0 +1,32 @@
+{
+  "name": "enowine",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@nuxtjs/apollo": "5.0.0-alpha.14",
+    "@nuxtjs/tailwindcss": "^6.7.2",
+    "@types/node": "^18.16.18",
+    "nuxt": "^3.11.2",
+    "nuxt-icons": "^3.2.1",
+    "sass": "^1.63.4",
+    "typescript": "^5.1.0",
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.0"
+  },
+  "dependencies": {
+    "@nuxt/image": "^1.0.0",
+    "@nuxtjs/google-fonts": "^3.0.1",
+    "@pinia/nuxt": "^0.5.1",
+    "@yeger/vue-masonry-wall": "^5.0.9",
+    "pinia": "^2.1.7",
+    "resend": "^2.1.0"
+  }
+}
