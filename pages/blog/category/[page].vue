@@ -1,5 +1,6 @@
 <script setup>
-  import { posts } from '~/store/posts'
+  import { computed } from 'vue';
+import { posts } from '~/store/posts'
   const route = useRoute()
   const articlesPerPage = 3
   const currentPage = ref(parseInt(route.params.page) || 1)
@@ -9,7 +10,9 @@
     }
     return (currentPage.value - 1) * articlesPerPage
   })
-  const variables = { skip: skipData.value, limit: 3, category: route.query.filter  }
+  const variables = computed(() => {
+    return { skip: skipData.value, limit: 3, category: route.query.filter }
+  })
   await posts().fetchPostsFilteredCategory(variables)
   const totalPages = computed(() => {
     return Math.ceil(posts().postsFilteredCategory.total / articlesPerPage)
@@ -17,6 +20,12 @@
   const handleFirstLetterUpperCase = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1)
   }
+  watch(
+  () => route.query.filter,
+  async () => {
+    await posts().fetchPostsFilteredCategory(variables);
+  }
+);
 </script>
 <template>
     <section
