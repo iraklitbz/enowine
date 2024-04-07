@@ -1,6 +1,6 @@
 export const dataQueryPosts = gql`
-      query postsCollection($skip: Int, $limit: Int) {
-        postsCollection(skip: $skip, limit: $limit) {
+      query postsCollection($skip: Int, $limit: Int, $locale: String) {
+        postsCollection(skip: $skip, limit: $limit, locale: $locale) {
             total
             items {
                 sys {
@@ -19,8 +19,8 @@ export const dataQueryPosts = gql`
       }
 `
 export const dataQueryPostsFilteredCategory = gql`
-      query postsCollection($skip: Int, $limit: Int, $category: String) {
-        postsCollection(skip: $skip, limit: $limit, where: { categories_contains_some: [$category] }) {
+      query postsCollection($skip: Int, $limit: Int, $category: String, $locale: String) {
+        postsCollection(skip: $skip, limit: $limit, where: { categories_contains_some: [$category] }, locale: $locale) {
             total
             items {
                 sys {
@@ -39,8 +39,8 @@ export const dataQueryPostsFilteredCategory = gql`
       }
 `
 export const dataQueryPost = gql`
-      query postCollection ($ID: String!) {
-        posts (id: $ID) {
+      query postCollection ($ID: String!, $locale: String) {
+        posts (id: $ID, locale: $locale) {
             sys {
                 publishedAt
             }
@@ -63,8 +63,8 @@ export const dataQueryPost = gql`
       }
 `
 export const dataQueryImage = gql`
-      query imageCollection ($ID: String!) {
-        asset (id: $ID) {
+      query imageCollection ($ID: String!, $locale: String) {
+        asset (id: $ID, locale: $locale) {
             url
           }
       }

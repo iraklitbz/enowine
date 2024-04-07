@@ -1,6 +1,7 @@
 <script setup>
   import { posts } from '~/store/posts'
   const route = useRoute()
+  const { locale } = useI18n()
   const articlesPerPage = 3
   const currentPage = ref(parseInt(route.params.page) || 1)
   const skipData = computed(() => {
@@ -9,7 +10,7 @@
     }
     return (currentPage.value - 1) * articlesPerPage
   })
-  const variables = { skip: skipData.value, limit: 3 }
+  const variables = { skip: skipData.value, limit: 3, locale: locale.value }
   await posts().fetchPosts(variables)
   const totalPages = computed(() => {
     return Math.ceil(posts().posts.total / articlesPerPage)
@@ -20,12 +21,11 @@
    id="articles"
    class="py-16 overflow-hidden bg-white sm:py-24 lg:py-28"
  >
-   <!-- Container -->
    <div class="max-w-screen-xl px-5 mx-auto sm:px-6 lg:px-8">
      <h2
        class="text-4xl font-semibold text-center font-display text-slate-900 sm:text-5xl"
      >
-       Últimas noticias
+      {{ $t('blog.title') }}
      </h2>
 
      <div

@@ -1,6 +1,9 @@
 <script setup>
       import { galleries } from '~/store/gallery'
-      await galleries().fetchGalleries()
+      const localePath = useLocalePath()
+      const { locale } = useI18n()
+      const variables = { locale: locale.value }
+      await galleries().fetchGalleries(variables)
       const handleDate = (date) => {
           const options = { year: 'numeric', month: 'long', day: 'numeric' }
           return new Date(date).toLocaleDateString('es-ES', options)
@@ -16,15 +19,16 @@
             <h2
               class="text-5xl font-semibold font-display text-slate-900 sm:text-6xl lg:leading-none"
             >
-              gallery de imágenes
+              {{ $t('gallery.title') }}
             </h2>
 
             <p class="text-lg text-slate-700  lg:max-w-lg mt-10">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pulvinar, nunc nec vehicula fermentum, nisl dolor ultrices
+              {{ $t('gallery.text1') }}
             </p>
           </div>
 
           <div
+            v-if="galleries().galleries.items"
             class="grid max-w-xl gap-12 mx-auto mt-12 sm:mt-16 lg:mx-0 lg:mt-24 lg:max-w-none lg:grid-cols-3 lg:gap-10 lg:pb-32"
           >
             <div
@@ -37,7 +41,7 @@
                 }"
             >
               <nuxt-link
-                :to="`/gallery/${gallery.sys.id}`"
+                :to="localePath(`/gallery/${gallery.sys.id}`)"
                 class="relative order-1 block w-full overflow-hidden group aspect-w-16 aspect-h-9 rounded-xl md:aspect-w-3 md:aspect-h-2"
               >
                 <img
@@ -61,10 +65,10 @@
                         }}
                 </time>
                 <nuxt-link
-                  :to="`/gallery/${gallery.sys.id}`"
+                  :to="localePath(`/gallery/${gallery.sys.id}`)"
                   class="inline-flex items-center justify-center gap-2 py-3 mt-6 font-medium transition duration-300 bg-white rounded-full shadow-sm group px-9 text-md text-sky-900 shadow-sky-100/50 ring-1 ring-slate-100/90 hover:bg-white/60 hover:text-sky-700 hover:shadow-md hover:shadow-sky-100"
                 >
-                  See the gallery
+                  {{ $t('gallery.button') }}
                     <nuxt-icon
                         name="arrow-diagonal"
                         class="icon icon-fill text-lg relative"

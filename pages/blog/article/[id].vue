@@ -1,7 +1,8 @@
 <script setup>
   import { posts } from '~/store/posts'
   const route = useRoute()
-  const variables = { ID: route.params.id }
+  const { locale } = useI18n()
+  const variables = { ID: route.params.id, locale: locale.value}
   await posts().fetchPost(variables)
   const handleDate = (date) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' }
@@ -14,6 +15,7 @@
 <template>
     <section>
         <article
+          v-if="posts().post.title"
           class="pb-10"
           
         >
@@ -93,7 +95,7 @@
                 <p
                   class="pl-0.5 text-lg font-semibold tracking-wide text-slate-900 sm:pl-0"
                 >
-                 Compartir artículo
+                  {{ $t('blog.sharearticle') }}
                 </p>
 
 
@@ -106,7 +108,7 @@
                       name="copy"
                       class="icon icon-stroke text-md relative"
                     />
-                    Copy link
+                      {{ $t('blog.copylink') }}
                   </button>
                 </div>
               </div>

@@ -1,5 +1,5 @@
 <script setup>
-import { posts } from '~/store/posts'
+const localePath = useLocalePath()
 const props = defineProps({
     post: {
         type: Object,
@@ -23,10 +23,11 @@ const handleDate = (date) => {
        >
          <div class="w-full px-4 pt-4">
            <nuxt-link
-            :to="`/blog/article/${props.post.sys.id}`"
+            :to="localePath(`/blog/article/${props.post.sys.id}`)"
              class="relative block w-full overflow-hidden group aspect-w-16 aspect-h-9 rounded-xl md:aspect-w-3 md:aspect-h-2"
            >
              <figure
+                v-if="props.post.feature"
                 class="h-52"
              >
                 <img
@@ -50,7 +51,7 @@ const handleDate = (date) => {
                     class="text-md bg-slate-200 hover:bg-slate-300 transition-colors ease-in-out delay-200 cursor-pointer text-primary px-4 py-1.5 rounded-full shadow-sky-100/50 ring-1 ring-slate-100"
                 >
                   <nuxt-link
-                    :to="`/blog/category/1?filter=${category}`"
+                    :to="localePath(`/blog/category/1?filter=${category}`)"
                   >
                     {{
                         category
@@ -60,17 +61,18 @@ const handleDate = (date) => {
             </ul>
            <div class="flex-1">
              <h3
+              v-if="props.post.title"
                class="mt-4 text-2xl font-medium leading-normal transition duration-200 ease-in-out font-display text-slate-900 decoration-slate-400 group-hover:text-sky-900"
              >
                 <nuxt-link 
-                    :to="`/blog/article/${props.post.sys.id}`"
+                    :to="localePath(`/blog/article/${props.post.sys.id}`)"
                 >
                 {{
                     props.post.title
                  }}
                </nuxt-link>
              </h3>
-             <p class="mt-3.5 text-md leading-7 text-slate-700 line-clamp-3">
+             <p v-if="props.post.description" class="mt-3.5 text-md leading-7 text-slate-700 line-clamp-3">
                {{
                     handleTruncate(props.post.description)
                }}

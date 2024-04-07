@@ -6,8 +6,8 @@ export const teams = defineStore('teamData', {
         team: []
     }),
     actions: {
-        async fetchTeam () {
-            const data = await apiCall(dataQueryTeams, 'teamCollection', {})
+        async fetchTeam (variables) {
+            const data = await apiCall(dataQueryTeams, 'teamCollection', variables)
             this.team = data
         }
     }

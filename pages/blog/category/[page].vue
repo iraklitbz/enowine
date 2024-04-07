@@ -1,6 +1,7 @@
 <script setup>
   import { computed } from 'vue';
-import { posts } from '~/store/posts'
+  import { posts } from '~/store/posts'
+  const { locale } = useI18n()
   const route = useRoute()
   const articlesPerPage = 3
   const currentPage = ref(parseInt(route.params.page) || 1)
@@ -11,7 +12,7 @@ import { posts } from '~/store/posts'
     return (currentPage.value - 1) * articlesPerPage
   })
   const variables = computed(() => {
-    return { skip: skipData.value, limit: 3, category: route.query.filter }
+    return { skip: skipData.value, limit: 3, category: route.query.filter, locale: locale.value }
   })
   await posts().fetchPostsFilteredCategory(variables)
   const totalPages = computed(() => {

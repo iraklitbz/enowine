@@ -1,6 +1,6 @@
 export const dataQueryTeams = gql`
-      query teamCollection {
-        teamCollection {
+      query teamCollection ($locale: String) {
+        teamCollection (locale: $locale) {
             items {
             name,
             ocupation,

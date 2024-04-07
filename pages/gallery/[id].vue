@@ -2,7 +2,8 @@
     import MasonryWall from '@yeger/vue-masonry-wall'
     import { galleries } from '~/store/gallery'
     const route = useRoute()
-    const variables = { ID: route.params.id }
+    const { locale } = useI18n()
+    const variables = { ID: route.params.id, locale: locale.value }
     const gallery = await galleries().fetchGallery(variables)
     const handleDate = (date) => {
         const options = { year: 'numeric', month: 'long', day: 'numeric' }
@@ -10,7 +11,7 @@
     }
 </script>
 <template>
-    <section class="py-16 overflow-hidden bg-slate-50 sm:py-24 lg:py-28 xl:py-32">
+    <section v-if="gallery.title && gallery.imagesCollection" class="py-16 overflow-hidden bg-slate-50 sm:py-24 lg:py-28 xl:py-32">
         <div
             class="mb-14 flex flex-col items-center justify-center gap-4"
         >

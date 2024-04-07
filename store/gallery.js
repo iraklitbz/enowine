@@ -6,8 +6,8 @@ export const galleries = defineStore('galleriesData', {
         galleries: []
     }),
     actions: {
-        async fetchGalleries () {
-            const data = await apiCall(dataQueryGalleryes, 'galleryCollection', {})
+        async fetchGalleries (variables) {
+            const data = await apiCall(dataQueryGalleryes, 'galleryCollection', variables)
             this.galleries = data
         },
         async fetchGallery (variables) {

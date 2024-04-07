@@ -1,6 +1,9 @@
 <script setup>
     import { teams } from '~/store/teams'
-    await teams().fetchTeam()
+    const { locale } = useI18n()
+    const localePath = useLocalePath()
+    const variables = { locale: locale.value }
+    await teams().fetchTeam(variables)
 </script>
 <template>
     <section class="pb-16 overflow-hidden bg-white sm:pb-20 lg:pb-28">
@@ -59,14 +62,14 @@
                 </ul>
             </li>
           </ul>
-          <nuxt-link to="/contact" class="font-gothic bg-slate-900 text-white hover:bg-primary inline-flex items-center rounded-full gap-2.5 justify-center px-7 py-3 text-xl leading-none outline-offset-2 transition-all duration-200 ease-in-out active:transition-none mt-14 font-medium">
-            Contact
+          <nuxt-link :to="localePath('/contact')" class="font-gothic bg-slate-900 text-white hover:bg-primary inline-flex items-center rounded-full gap-2.5 justify-center px-7 py-3 text-xl leading-none outline-offset-2 transition-all duration-200 ease-in-out active:transition-none mt-14 font-medium">
+            {{ $t('navmenu.contact') }}
           </nuxt-link>
         </div>
 
         <div class="order-1 lg:order-2 lg:col-span-7 lg:pl-16">
           <h3 class="text-xl font-medium leading-8 font-display text-slate-900 sm:text-2xl sm:leading-10">
-            Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500.
+            {{ $t('about.titletext') }}
           </h3>
 
           <div class="mt-6 prose sm:prose-lg sm:mt-8">
@@ -77,24 +80,17 @@
             <p
                 class="mt-3"
             >
-              By conducting thorough research and understanding their target
-              audience, I was able to establish a cohesive visual language that
-              effectively communicates the journal's core values and mission.
+              {{ $t('about.titletext') }}
             </p>
 
             <p
                 class="mt-3"
             >
-              Noteworthy accomplishments include implementing responsive design,
-              optimizing the website's navigation, and increasing overall user
-              engagement.
+              {{ $t('about.text1') }}
             </p>
 
             <p>
-              Through our partnership, Horizons in Perspective now boasts a
-              distinctive and memorable brand, with a seamless online experience
-              that resonates with their readers and bolsters their position as a
-              thought leader in the realm of innovation and creativity.
+                {{ $t('about.text2') }}
             </p>
           </div>
         </div>

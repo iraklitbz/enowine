@@ -1,10 +1,20 @@
 <script setup>
+const { locale } = useI18n()
+const switchLocalePath = useSwitchLocalePath()
+const localePath = useLocalePath()
 const props = defineProps({
     navbar: {
         type: Array,
         required: true
+    },
+    availableLocales: {
+        type: Array,
+        required: true
     }
 })
+function handleLanguage (value) {
+    navigateTo(switchLocalePath(value))
+}
 const mobileMenuOpen = ref(false)
 </script>
 <template>
@@ -66,16 +76,36 @@ const mobileMenuOpen = ref(false)
         >
             <div>
             <!-- Mobile menu links -->
-            <div class="flex flex-col space-y-4">
-                <nuxt-link
-                    v-for="item in props.navbar"
-                    :key="item.name"
-                    :to="item.url"
-                    class="block text-base font-semibold duration-200 text-slate-700 hover:text-slate-900"
+                <div class="flex flex-col space-y-4">
+                    <nuxt-link
+                        v-for="item in props.navbar"
+                        :key="item.name"
+                        :to="item.url"
+                        class="block text-base font-semibold duration-200 text-slate-700 hover:text-slate-900"
+                    >
+                        {{ $t(item.name) }}
+                    </nuxt-link>
+                </div>
+                <ul
+                    class="flex items-center justify-center md:justify-end gap-2 mt-5 md:mt-0"
                 >
-                    {{ item.name }}
-                </nuxt-link>
-            </div>
+                    <li
+                        v-for="(localeItem, index) in availableLocales"
+                        :key="index"
+                    >
+                        <button
+                            type="button"
+                            @click="() => handleLanguage(localeItem.value)"
+                            class="p-1 rounded-md"
+                            :class="{
+                                'bg-black text-white font-bold': localeItem.value === locale,
+                                'text-gray-500': localeItem.value !== locale
+                            }"
+                        >
+                            {{ localeItem.label }}
+                        </button>
+                    </li>
+                </ul>
             </div>
         </div>
         </div>

@@ -1,6 +1,6 @@
 export const dataQueryGalleryes = gql`
-      query gallerysCollection {
-        galleryCollection {
+      query gallerysCollection($locale: String) {
+        galleryCollection(locale: $locale) {
             total
             items {
                 sys {
@@ -18,8 +18,8 @@ export const dataQueryGalleryes = gql`
       }
 `
 export const dataQueryGallery = gql`
-      query galleryCollection ($ID: String!) {
-        gallery (id: $ID) {
+      query galleryCollection ($ID: String!, $locale: String) {
+        gallery (id: $ID, locale: $locale) {
             title,
             sys {
                 publishedAt

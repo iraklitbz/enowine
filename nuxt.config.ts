@@ -9,17 +9,18 @@ export default defineNuxtConfig({
     }
   },
   modules: [
-      'nuxt-icons',
-      '@nuxtjs/tailwindcss',
-      '@nuxt/image',
-      '@nuxtjs/apollo',
-      '@pinia/nuxt',
-      ['@nuxtjs/google-fonts', {
-        families: {
-          'Open Sans': [400, 700],
-          'Grape Nuts': [400],
-        }
-      }]
+    'nuxt-icons',
+    '@nuxtjs/tailwindcss',
+    '@nuxt/image',
+    '@nuxtjs/apollo',
+    '@pinia/nuxt',
+    ['@nuxtjs/google-fonts', {
+      families: {
+        'Open Sans': [400, 700],
+        'Grape Nuts': [400],
+      }
+    }],
+    "@nuxtjs/i18n"
   ],
   apollo: {
     tokenStorage: 'cookie',
@@ -33,6 +34,23 @@ export default defineNuxtConfig({
         }
       }
     },
+  },
+  i18n: {
+    strategy: 'prefix_except_default',
+    locales: [
+      {
+        code: 'en',
+        name: 'English',
+        label: 'EN'
+      },
+      {
+        code: 'ka',
+        name: 'georgian',
+        label: 'KA'
+      }
+    ],
+    vueI18n: './i18n.config.ts',
+    defaultLocale: 'en'
   },
   components: [
     '~/components',

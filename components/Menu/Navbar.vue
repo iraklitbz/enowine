@@ -1,27 +1,44 @@
 <script setup>
+const { locale, locales } = useI18n()
+const switchLocalePath = useSwitchLocalePath()
+const localePath = useLocalePath()
 const navbar = ref([
     {
-        name: 'Home',
+        name: 'navmenu.home',
         url: '/'
     },
     {
-        name: 'About us',
+        name: 'navmenu.about',
         url: '/about-us'
     },
     {
-        name: 'Blog',
+        name: 'navmenu.blog',
         url: '/blog/1'
     },
     {
-        name: 'Gallery',
+        name: 'navmenu.gallery',
         url: '/gallery'
+    },
+    {
+        name: 'navmenu.contact',
+        url: '/contact'
     }
-
 ])
+const availableLocales = computed(() => {
+      return (locales.value).map((item) => {
+          return {
+              value: item.code,
+              label: item.label,
+              name: item.name
+          }
+      })
+  })
+function handleLanguage (value) {
+    navigateTo(switchLocalePath(value))
+}
 </script>
 <template>
      <nav class="relative z-50 flex items-center justify-between w-full">
-          <!-- Logo -->
           <div class="flex items-center shrink-0">
             <nuxt-link
               to="/"
@@ -35,30 +52,41 @@ const navbar = ref([
             </nuxt-link>
           </div>
 
-          <!-- Desktop navigation links -->
           <div class="items-center hidden md:flex md:space-x-6 lg:space-x-8">
             <nuxt-link
                 v-for="item in navbar"
                 :key="item.name"
-                :to="item.url"
+                :to="localePath(item.url)"
                 class="font-gothic relative duration-200 after:absolute after:left-1/2 after:-bottom-2.5 after:h-0.5 after:w-4 text-xl after:-translate-x-1/2 after:rounded-full after:bg-slate-900 after:opacity-0 after:content-[&quot;&quot;] font-medium text-slate-700 hover:text-slate-900 hover:after:opacity-25"
             >
-                {{ item.name }}
+                {{ $t(item.name) }}
             </nuxt-link>
           </div>
 
           <div class="flex items-center">
-            <!-- Call to action -->
-            <nuxt-link
-              class="text-slate-900 font-gothic registraionButton shadow-sm shadow-sky-100/50 ring-1 ring-slate-100 hover:bg-slate-200/60 hover:shadow-sky-100/50 bg-slate-100/80 inline-flex items-center rounded-full gap-2.5 justify-center px-4 md:px-7 py-3 text-lg md:text-xl font-semibold leading-none outline-offset-2 transition-all duration-200 ease-in-out active:transition-none"
-              to="/contact"
+            <ul
+                class="items-center justify-center md:justify-end gap-2 ml-7 mt-5 md:mt-0 hidden md:flex"
             >
-              Contact
-            </nuxt-link>
-
-            <!-- Mobile menu button -->
+                <li
+                    v-for="(localeItem, index) in availableLocales"
+                    :key="index"
+                >
+                    <button
+                        type="button"
+                        @click="() => handleLanguage(localeItem.value)"
+                        class="p-1 rounded-md"
+                        :class="{
+                            'bg-black text-white font-bold': localeItem.value === locale,
+                            'text-gray-500': localeItem.value !== locale
+                        }"
+                    >
+                        {{ localeItem.label }}
+                    </button>
+                </li>
+            </ul>
             <MobileMenu 
                 :navbar="navbar"
+                :available-locales="availableLocales"
             />
           </div>
         </nav>

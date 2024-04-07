@@ -1,26 +1,26 @@
 <script setup>
+const localePath = useLocalePath()
 const navbar = ref([
     {
-        name: 'Home',
+        name: 'navmenu.home',
         url: '/'
     },
     {
-        name: 'About us',
+        name: 'navmenu.about',
         url: '/about-us'
     },
     {
-        name: 'Blog',
+        name: 'navmenu.blog',
         url: '/blog/1'
     },
     {
-        name: 'Contact',
-        url: '/contact'
+        name: 'navmenu.gallery',
+        url: '/gallery'
     },
     {
-        name: 'Gallery',
-        url: '/gallery'
+        name: 'navmenu.contact',
+        url: '/contact'
     }
-
 ])
 </script>
 <template>
@@ -35,14 +35,14 @@ const navbar = ref([
               <h3
                 class="text-4xl font-semibold text-center text-white font-display sm:text-5xl lg:max-w-xl lg:text-left"
               >
-                Lets make something great together
+                {{ $t('footer.title') }}
               </h3>
               <div class="hidden lg:block">
                 <nuxt-link
-                  to="/contact"
+                  :to="localePath('/contact')"
                   class="mt-12 bg-white hover:bg-sky-50 text-slate-700 inline-flex items-center rounded-full gap-2.5 justify-center px-7 py-3 text-md font-semibold leading-none outline-offset-2 transition-all duration-200 ease-in-out active:transition-none"
                 >
-                  Contact
+                  {{ $t('navmenu.contact') }}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
@@ -64,16 +64,15 @@ const navbar = ref([
               <p
                 class="text-lg text-center text-slate-50 lg:max-w-sm lg:text-left"
               >
-                Iced pumpkin ristretto irish trifecta robusta trade froth
-                affogato barista con barista cappuccino filter roast.
+                {{ $t('footer.text1') }}
               </p>
 
               <!-- Call to action button for small screens -->
               <nuxt-link
-                to="/contact"
+                :to="localePath('/contact')"
                 class="font-gothic mt-10 inline-flex items-center justify-center gap-x-2.5 rounded-full bg-white py-3 px-7 text-xl font-semibold leading-none text-slate-700 duration-200 ease-in-out hover:bg-sky-50 lg:hidden"
               >
-                Contact
+                  {{ $t('navmenu.contact') }}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
@@ -93,7 +92,7 @@ const navbar = ref([
               >
 
                 <nuxt-link
-                  to="/contact"
+                  :to="localePath('/contact')"
                   class="flex items-center justify-center gap-2.5 rounded-full border border-slate-600/90 py-2.5 text-sm text-slate-50 duration-200 ease-in-out hover:bg-slate-800 hover:text-white lg:gap-2 xl:gap-2.5"
                 >
                   <svg
@@ -110,7 +109,7 @@ const navbar = ref([
                       d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
                     />
                   </svg>
-                  Email us
+                 {{ $t('footer.emailus') }}
                 </nuxt-link>
 
                 <a
@@ -163,7 +162,7 @@ const navbar = ref([
                 :to="item.url"
                 class="text-base font-medium duration-200 ease-in-out text-slate-100 hover:text-white"
               >
-                {{ item.name }}
+                {{ $t(item.name) }}
               </nuxt-link>
             </div>
             <p class="mt-8 text-base text-slate-400/90 md:mt-0">
