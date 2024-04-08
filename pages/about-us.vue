@@ -20,7 +20,7 @@
             <li
                 v-for="team in teams().team.items"
             >
-              <h6 class="text-xl font-medium font-display text-slate-800">
+              <h6 class="text-xl font-display text-slate-800">
                 {{ team.name }}
               </h6>
                 <span class="block mt-1 text-base text-slate-600">
@@ -62,13 +62,13 @@
                 </ul>
             </li>
           </ul>
-          <nuxt-link :to="localePath('/contact')" class="font-gothic bg-slate-900 text-white hover:bg-primary inline-flex items-center rounded-full gap-2.5 justify-center px-7 py-3 text-xl leading-none outline-offset-2 transition-all duration-200 ease-in-out active:transition-none mt-14 font-medium">
+          <nuxt-link :to="localePath('/contact')" class="font-gothic bg-slate-900 text-white hover:bg-primary inline-flex items-center rounded-full gap-2.5 justify-center px-7 py-3 text-xl leading-none outline-offset-2 transition-all duration-200 ease-in-out active:transition-none mt-14">
             {{ $t('navmenu.contact') }}
           </nuxt-link>
         </div>
 
         <div class="order-1 lg:order-2 lg:col-span-7 lg:pl-16">
-          <h3 class="text-xl font-medium leading-8 font-display text-slate-900 sm:text-2xl sm:leading-10">
+          <h3 class="text-xl leading-8 font-display text-slate-900 sm:text-2xl sm:leading-10">
             {{ $t('about.titletext') }}
           </h3>
 

@@ -4,7 +4,7 @@ export default defineNuxtConfig({
     pageTransition: { name: 'page', mode: 'out-in' },
     head: {
       link: [
-        { rel: 'stylesheet', href: 'https://use.typekit.net/dlq6ymk.css' }
+        { rel: 'stylesheet', href: 'https://use.typekit.net/isi5msw.css' }
       ]
     }
   },

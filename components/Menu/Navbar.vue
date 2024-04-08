@@ -41,9 +41,9 @@ function handleLanguage (value) {
      <nav class="relative z-50 flex items-center justify-between w-full">
           <div class="flex items-center shrink-0">
             <nuxt-link
-              to="/"
+              :to="localePath('/')"
               aria-label="ir a la pagina de inicio"
-              class="font-gothic relative flex flex-col items-center text-3xl font-semibold leading-none text-slate-900"
+              class="font-primary relative flex flex-col items-center text-3xl font-semibold leading-none text-slate-900"
             >
               Lorem Ipsum
               <span class="handwriting text-2xl">
@@ -57,7 +57,7 @@ function handleLanguage (value) {
                 v-for="item in navbar"
                 :key="item.name"
                 :to="localePath(item.url)"
-                class="font-gothic relative duration-200 after:absolute after:left-1/2 after:-bottom-2.5 after:h-0.5 after:w-4 text-xl after:-translate-x-1/2 after:rounded-full after:bg-slate-900 after:opacity-0 after:content-[&quot;&quot;] font-medium text-slate-700 hover:text-slate-900 hover:after:opacity-25"
+                class="font-primary relative duration-200 after:absolute after:left-1/2 after:-bottom-2.5 after:h-0.5 after:w-4 text-xl after:-translate-x-1/2 after:rounded-full after:bg-slate-900 after:opacity-0 after:content-[&quot;&quot;] font-medium text-slate-700 hover:text-slate-900 hover:after:opacity-25"
             >
                 {{ $t(item.name) }}
             </nuxt-link>
@@ -93,6 +93,10 @@ function handleLanguage (value) {
 </template>
 
 <style lang="scss" scoped>
+    .font-primary {
+        font-family: var(--font-primary);
+        font-weight: 700;
+    }
    .router-link-exact-active {
         @apply after:opacity-100;
    }
@@ -101,10 +105,5 @@ function handleLanguage (value) {
         &::after {
             display: none;
         }
-   }
-   .font-gothic {
-        font-family: "ferryman", sans-serif;
-        font-weight: 500;
-        font-style: normal;
    }
 </style>
