@@ -17,6 +17,11 @@ import { capitalLetter } from '~/utils/capital-util'
         <div
           class="max-w-3xl px-4 mx-auto sm:px-6 lg:mx-0 lg:w-2/3 lg:max-w-none lg:px-8 lg:pr-16"
         >
+          <div
+            class="mx-auto mb-8 sm:mb-12 lg:mb-16 lg:max-w-[350px]"
+          >
+            <img class="w-full" src="~/assets/logo.svg" />
+          </div>
           <h1
             class="text-5xl font-semibold font-display text-slate-900 sm:text-6xl"
           >

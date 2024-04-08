@@ -43,12 +43,9 @@ function handleLanguage (value) {
             <nuxt-link
               :to="localePath('/')"
               aria-label="ir a la pagina de inicio"
-              class="font-primary relative flex flex-col items-center text-3xl font-semibold leading-none text-slate-900"
+              class="w-32 leading-none text-slate-900  cursor-pointer block"
             >
-              Lorem Ipsum
-              <span class="handwriting text-2xl">
-                wine!
-              </span>
+                <img class="w-full" src="~/assets/logowithout.svg" />
             </nuxt-link>
           </div>
 
